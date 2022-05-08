@@ -1,5 +1,14 @@
 spring:
   r2dbc:
-    url: r2dbc:mysql://localhost:3306/mysql?schema=client
+    url: r2dbc:mysql://localhost:3306/clients
     username: root
     password: root
+logging:
+  level:
+    org:
+      springframework:
+        r2dbc: DEBUG
+
+server:
+  error:
+    include-stacktrace: on_param
