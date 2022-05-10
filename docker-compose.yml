@@ -9,7 +9,8 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - clientwebflux_client_data:/var/lib/mysql
+      - clientwebflux_data:/var/lib/mysql
+    restart: always
 
 volumes:
-  clientwebflux_client_data:
+  clientwebflux_data:

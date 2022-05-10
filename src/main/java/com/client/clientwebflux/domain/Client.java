@@ -11,10 +11,10 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Builder
 @With
-@Table("client")
+@Table("clients")
 public class Client {
     @Id
-    private Integer id;
+    private Long id;
     @NotNull(message = "O nome do cliente não pode ser nulo")
     @NotEmpty(message = "O nome do cliente não pode estar vazio!")
     private String name;
