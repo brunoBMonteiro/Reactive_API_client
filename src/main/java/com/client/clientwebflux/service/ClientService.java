@@ -20,12 +20,7 @@ public class ClientService {
 
     public Mono<Client> findById(int id){
         return clientRepository.findById(id)
-                .switchIfEmpty(monoResponseStatusNotFoundException())
-                .log();
-    }
-
-    public <T> Mono<T> monoResponseStatusNotFoundException(){
-        return Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado!"));
+                .switchIfEmpty(monoResponseStatusNotFoundException());
     }
 
     public Mono<Client> createClient(Client client){
@@ -35,10 +30,15 @@ public class ClientService {
     public Mono<Void> updateClient(Client client) {
         return findById(Math.toIntExact(client.getId()))
                 .map(clientDb -> client.withId(clientDb.getId()))
-                .flatMap(clientRepository::save).then();
+                .flatMap(clientRepository::save).thenEmpty(Mono.empty());
     }
 
     public Mono<Void> deleteClient(int id){
-        return findById(id).flatMap(clientRepository::delete).then();
+        return findById(id).flatMap(clientRepository::delete);
+    }
+
+
+    public <T> Mono<T> monoResponseStatusNotFoundException(){
+        return Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado!"));
     }
 }
