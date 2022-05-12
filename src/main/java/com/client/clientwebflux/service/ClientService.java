@@ -23,17 +23,17 @@ public class ClientService {
                 .switchIfEmpty(monoResponseStatusNotFoundException());
     }
 
-    public Mono<Client> createClient(Client client){
+    public Mono<Client> save(Client client){
         return clientRepository.save(client);
     }
 
-    public Mono<Void> updateClient(Client client) {
+    public Mono<Void> update(Client client) {
         return findById(Math.toIntExact(client.getId()))
                 .map(clientDb -> client.withId(clientDb.getId()))
                 .flatMap(clientRepository::save).thenEmpty(Mono.empty());
     }
 
-    public Mono<Void> deleteClient(int id){
+    public Mono<Void> delete(int id){
         return findById(id).flatMap(clientRepository::delete);
     }
 

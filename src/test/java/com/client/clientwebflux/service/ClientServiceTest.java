@@ -76,7 +76,7 @@ class ClientServiceTest {
     }
 
     @Test
-    @DisplayName("Save client, salva client criado quando der sucesso!")
+    @DisplayName("SaveClient, salva client criado quando der sucesso!")
     void saveCreateClientWhenSuccessful(){
         Client clientToBeSaved = ClientCreator.createClientToBeSaved();
 
@@ -84,10 +84,11 @@ class ClientServiceTest {
                 .thenReturn(Mono.just(client));
 
 
-        StepVerifier.create(clientService.createClient(clientToBeSaved))
+        StepVerifier.create(clientService.save(clientToBeSaved))
                 .expectSubscription()
                 .expectNext(client)
                 .verifyComplete();
     }
+
 
 }

@@ -35,18 +35,18 @@ public class ClientController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Client> createClient(@Valid @NotNull @RequestBody Client client){
-        return clientService.createClient(client);
+        return clientService.save(client);
     }
 
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Mono<Void>  updateClient(@PathVariable Long id, @RequestBody Client client) {
-        return clientService.updateClient(client.withId(id));
+        return clientService.update(client.withId(id));
     }
 
     @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Mono<Void> deleteClient(@PathVariable int id){
-        return clientService.deleteClient(id);
+        return clientService.delete(id);
     }
 }
