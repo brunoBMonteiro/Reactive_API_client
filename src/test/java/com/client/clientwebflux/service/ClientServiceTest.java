@@ -40,16 +40,6 @@ class ClientServiceTest {
                 .verifyComplete();
     }
 
-    @Test
-    @DisplayName("FindAll, retorna um flux de clientes")
-    void findAllReturnFluxClientErrorWhenFluxIsEmpty(){
-        Mockito.when(clientRepositoryMock.findAll())
-                .thenReturn(Flux.empty());
-
-        StepVerifier.create(clientService.findAll())
-                .expectSubscription()
-                .expectError(ResponseStatusException.class);
-    }
 
     @Test
     @DisplayName("FindById, retorna um mono com cliente quando encontrar id")
@@ -76,7 +66,7 @@ class ClientServiceTest {
     }
 
     @Test
-    @DisplayName("SaveClient, salva client criado quando der sucesso!")
+    @DisplayName("Save, salva client criado quando der sucesso!")
     void saveCreateClientWhenSuccessful(){
         Client clientToBeSaved = ClientCreator.createClientToBeSaved();
 
